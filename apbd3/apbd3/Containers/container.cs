@@ -8,15 +8,17 @@ public abstract class container : Icontainer
         public double depth { get; set; }
         public string serialNum { get; set; }
         public double maxCargo { get; set; }
+        private int contNum = 0;
 
-        protected container(double cargoMass, double height, double ownMass, double depth, string serialNum, double maxCargo)
+        protected container(double cargoMass, double height, double ownMass, double depth, double maxCargo)
         {
                 CargoMass = cargoMass;
                 this.height = height;
                 this.ownMass = ownMass;
                 this.depth = depth;
-                this.serialNum = serialNum;
+                this.serialNum = "KON";
                 this.maxCargo = maxCargo;
+                contNum++;
         }
 
         public void unload()
@@ -27,5 +29,10 @@ public abstract class container : Icontainer
         public void Load(double cargoWeight)
         {
                 throw new OverfillExcetion();
+        }
+        
+        public string ToString()
+        {
+                return $"Serial number: {serialNum}, Cargo mass: {cargoMass}, Height: {height}, Own mass: {ownMass}, Depth: {depth}, Max cargo: {maxCargo}";
         }
 }
