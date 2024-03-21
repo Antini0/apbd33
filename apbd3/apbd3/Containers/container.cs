@@ -25,9 +25,9 @@ public abstract class container : Icontainer
                 contNum++;
         }
 
-        public void unload()
+        public void unload(double toUnload)
         {
-                throw new NotImplementedException();
+                this.cargoMass -= toUnload;
         }
 
         public void Load(double cargoWeight)

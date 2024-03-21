@@ -2,6 +2,6 @@
 
 public interface Icontainer
 {
-    void unload();
+    void unload(double toUnload);
     void Load(double cargoWeight);
 }
