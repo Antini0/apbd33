@@ -2,6 +2,5 @@
 
 public enum PossibleProducts
 {
-    Banana = 1;
     
 }

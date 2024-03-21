@@ -2,9 +2,11 @@
 
 public class LiquidContainer : container
 {
-    public LiquidContainer(double cargoMass, double height, double ownMass, double depth, string serialNum, double maxCargo, int contNum) : base(cargoMass, height, ownMass, depth, serialNum, maxCargo)
+    private bool isHazardous;
+    public LiquidContainer(double cargoMass, double height, double ownMass, double depth, double maxCargo, bool isHazardous) : base(cargoMass, height, ownMass, depth, maxCargo)
     {
-        serialNum += "-L-" + serialNum.ToString();
+        serialNum += "-L-" + Convert.ToString(contNum);
+        this.isHazardous = isHazardous;
     }
     
     public override string ToString()

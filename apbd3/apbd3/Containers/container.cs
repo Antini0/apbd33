@@ -2,21 +2,25 @@
 
 public abstract class container : Icontainer
 {
-        public double CargoMass { get; set; }
+        public double cargoMass { get; set; }
         public double height { get; set; }
         public double ownMass { get; set; }
         public double depth { get; set; }
         public string serialNum { get; set; }
         public double maxCargo { get; set; }
-        private int contNum = 0;
+        public static int contNum = 0;
 
-        protected container(double cargoMass, double height, double ownMass, double depth, double maxCargo)
+        public container(double cargoMass, double height, double ownMass, double depth, double maxCargo)
         {
-                CargoMass = cargoMass;
+                if (cargoMass > maxCargo)
+                {
+                        throw new OverfillExcetion("za duza masa ladunku");
+                }
+                this.cargoMass = cargoMass;
                 this.height = height;
                 this.ownMass = ownMass;
                 this.depth = depth;
-                this.serialNum = "KON";
+                serialNum = "KON";
                 this.maxCargo = maxCargo;
                 contNum++;
         }
@@ -28,11 +32,16 @@ public abstract class container : Icontainer
 
         public void Load(double cargoWeight)
         {
-                throw new OverfillExcetion();
+                if (cargoMass + cargoWeight > maxCargo)
+                {
+                        throw new OverfillExcetion("za duza masa ladunku");
+                }
+                this.cargoMass += cargoWeight;
         }
         
-        public string ToString()
+        public virtual string ToString()
         {
                 return $"Serial number: {serialNum}, Cargo mass: {cargoMass}, Height: {height}, Own mass: {ownMass}, Depth: {depth}, Max cargo: {maxCargo}";
         }
+        
 }
