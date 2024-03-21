@@ -8,9 +8,49 @@ public class LiquidContainer : container
         serialNum += "-L-" + Convert.ToString(contNum);
         this.isHazardous = isHazardous;
     }
+
+    public void notify()
+    {
+        if (isHazardous)
+        {
+            if (cargoMass > maxCargo / 2)
+            {
+                Console.WriteLine("\nMateriał niebezpieczny w kontenerze " + serialNum + " przekracza dozwolone 50% pojemności kontenera. Niebezpieczeństwo");
+            }
+        }
+        else
+        {
+            if (cargoMass > maxCargo * 0.9)
+            {
+                Console.WriteLine("\nMateriał w kontenerze " + serialNum + " przekracza dozwolone 90% pojemności kontenera. Niebezpieczeństwo");
+            }
+        }
+    }
+    
+    public void unload()
+    {
+        throw new NotImplementedException();
+    }
+
+    public void Load(double cargoWeight)
+    {
+        if (cargoMass + cargoWeight > maxCargo)
+        {
+            throw new OverfillExcetion("za duza masa ladunku");
+        }
+        this.cargoMass += cargoWeight;
+        notify();
+    }
     
     public override string ToString()
     {
-        return $"Serial number: {serialNum}, Cargo mass: {cargoMass}, Height: {height}, Own mass: {ownMass}, Depth: {depth}, Max cargo: {maxCargo}";
+        if (!isHazardous)
+        {
+            return $"Serial number: {serialNum}, Cargo mass: {cargoMass}, Height: {height}, Own mass: {ownMass}, Depth: {depth}, Max cargo: {maxCargo}";
+        }
+        else
+        {
+            return $"Serial number: {serialNum}, Cargo mass: {cargoMass}, Height: {height}, Own mass: {ownMass}, Depth: {depth}, Max cargo: {maxCargo}, Materiał Niebezpieczny";
+        }
     }
 }
