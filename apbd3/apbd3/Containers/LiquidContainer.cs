@@ -1,6 +1,6 @@
 ﻿namespace apbd3.Containers;
 
-public class LiquidContainer : container
+public class LiquidContainer : container, IHazardNotifier
 {
     private bool isHazardous;
     public LiquidContainer(double cargoMass, double height, double ownMass, double depth, double maxCargo, bool isHazardous) : base(cargoMass, height, ownMass, depth, maxCargo)
@@ -27,9 +27,13 @@ public class LiquidContainer : container
         }
     }
     
-    public void unload()
+    public void unload(double toUnload)
     {
-        throw new NotImplementedException();
+        if (toUnload > cargoMass)
+        {
+            throw new takeTooMuchException("You want to unload more than the container has");
+        }
+        this.cargoMass -= toUnload;
     }
 
     public void Load(double cargoWeight)
