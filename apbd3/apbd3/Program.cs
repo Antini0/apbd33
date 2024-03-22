@@ -44,4 +44,6 @@ cs1.swapContainers(container6, "KON-G-3");
 
 getShipInfo(cs1);
 
+Console.WriteLine("FAFA");
+
 
